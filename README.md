@@ -1,8 +1,8 @@
 # Sleep Tracker — Claude Sonnet 4.6 → Kotlin Multiplatform (KMP) Migration
 
-> This is repo 4 of 7 from my M.Sc. thesis at McMaster University, *"Who Moved My Button?": A Usability Evaluation of LLM-Assisted Cross-Platform Migration*. I had two AI coding agents (Claude Sonnet 4.6 and GPT-5.5) each migrate a real mobile health app to three different frameworks, then evaluated all 7 resulting apps for usability. This repo is Claude Sonnet 4.6's rewrite in Kotlin Multiplatform — it turned out to be the best-performing migration of the six. The other six are linked below.
+> Repo 4/7 from my M.Sc. thesis, *"Who Moved My Button?"* (McMaster, 2026) — Claude Sonnet 4.6's migration to Kotlin Multiplatform, the best-performing of the six. Other repos + baseline linked below.
 
-Compose Multiplatform (Android) rewrite of the original React Native "Sleep Tracker" privacy-transparency app, produced by **Claude Sonnet 4.6** under a shared 15-rule migration prompt I wrote. It talks to the same Node.js/Express backend as the original app (see [thesis-privacy-baseline](https://github.com/MelvinMo/thesis-privacy-baseline)).
+Compose Multiplatform (Android) rewrite of the original React Native "Sleep Tracker" privacy-transparency app, produced by **Claude Sonnet 4.6** under a shared 15-rule migration prompt I wrote. It talks to the same Node.js/Express backend as the original app (see [llm-migration-sleeptracker-baseline](https://github.com/MelvinMo/llm-migration-sleeptracker-baseline)).
 
 **UI fidelity target:** pixel-for-pixel match to the React Native source — layouts, text, font sizes, colors, padding, icons, and navigation flows were all checked against the original.
 
@@ -26,13 +26,13 @@ This is the only one of the six migrations that scored *better* than the origina
 
 | Repo | Description |
 |---|---|
-| [thesis-privacy-baseline](https://github.com/MelvinMo/thesis-privacy-baseline) | Original React Native app (unmodified snapshot) |
-| **thesis-privacy-sonnet46-kmp** | **This repo** — Claude Sonnet 4.6 → KMP |
-| [thesis-privacy-sonnet46-flutter](https://github.com/MelvinMo/thesis-privacy-sonnet46-flutter) | Claude Sonnet 4.6 → Flutter |
-| [thesis-privacy-sonnet46-maui](https://github.com/MelvinMo/thesis-privacy-sonnet46-maui) | Claude Sonnet 4.6 → .NET MAUI |
-| [thesis-privacy-gpt55-kmp](https://github.com/MelvinMo/thesis-privacy-gpt55-kmp) | GPT-5.5 → KMP |
-| [thesis-privacy-gpt55-flutter](https://github.com/MelvinMo/thesis-privacy-gpt55-flutter) | GPT-5.5 → Flutter |
-| [thesis-privacy-gpt55-maui](https://github.com/MelvinMo/thesis-privacy-gpt55-maui) | GPT-5.5 → .NET MAUI |
+| [llm-migration-sleeptracker-baseline](https://github.com/MelvinMo/llm-migration-sleeptracker-baseline) | Original React Native app (unmodified snapshot) |
+| **llm-migration-sleeptracker-sonnet46-kmp** | **This repo** — Claude Sonnet 4.6 → KMP |
+| [llm-migration-sleeptracker-sonnet46-flutter](https://github.com/MelvinMo/llm-migration-sleeptracker-sonnet46-flutter) | Claude Sonnet 4.6 → Flutter |
+| [llm-migration-sleeptracker-sonnet46-maui](https://github.com/MelvinMo/llm-migration-sleeptracker-sonnet46-maui) | Claude Sonnet 4.6 → .NET MAUI |
+| [llm-migration-sleeptracker-gpt55-kmp](https://github.com/MelvinMo/llm-migration-sleeptracker-gpt55-kmp) | GPT-5.5 → KMP |
+| [llm-migration-sleeptracker-gpt55-flutter](https://github.com/MelvinMo/llm-migration-sleeptracker-gpt55-flutter) | GPT-5.5 → Flutter |
+| [llm-migration-sleeptracker-gpt55-maui](https://github.com/MelvinMo/llm-migration-sleeptracker-gpt55-maui) | GPT-5.5 → .NET MAUI |
 
 ---
 
@@ -78,7 +78,7 @@ The checked-in default (`YOUR_LAN_IP`) is a placeholder — you must replace it 
 
 `10.0.2.2` is the Android emulator's alias for the host machine's `localhost`. For a physical device, find your LAN IP with `ipconfig` (Windows) or `ifconfig` (Mac).
 
-To run the backend locally, see the backend setup instructions in [thesis-privacy-baseline](https://github.com/MelvinMo/thesis-privacy-baseline).
+To run the backend locally, see the backend setup instructions in [llm-migration-sleeptracker-baseline](https://github.com/MelvinMo/llm-migration-sleeptracker-baseline).
 
 ---
 
