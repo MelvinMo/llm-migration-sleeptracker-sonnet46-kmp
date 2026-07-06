@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+MIGRATION: Expo's app.json permissions and background modes → Android Manifest.
+app.json iOS permissions:
+  NSMicrophoneUsageDescription → RECORD_AUDIO
+  NSMotionUsageDescription     → (no equivalent Android permission; sensors are open)
+app.json Android plugins:
+  FOREGROUND_SERVICE           → FOREGROUND_SERVICE + foreground service types
+  Background modes: audio/fetch → WorkManager ForegroundWorker
+
+MIGRATION: edgeToEdgeEnabled: true → android:windowSoftInputMode in Activity
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- MIGRATION: RECORD_AUDIO replaces expo-av Audio permission request -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- MIGRATION: Internet access for Ktor HTTP calls to backend -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- MIGRATION: FOREGROUND_SERVICE replaces expo-background-fetch on Android 8+ -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- MIGRATION: FOREGROUND_SERVICE_MICROPHONE required for audio during background work (Android 12+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <!-- MIGRATION: Wake lock for continuous sensor monitoring during sleep session -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- MIGRATION: POST_NOTIFICATIONS required on Android 13+ for ForegroundService notification -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <application
+        android:name=".SleepTrackerApplication"
+        android:label="Sleep Tracker Kotlin"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SleepTracker"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!--
+            WorkManager registers its own internal services via manifest merger.
+            SensorWorker (CoroutineWorker) does NOT require a <service> entry here.
+            The foreground service type is declared in SensorWorker.getForegroundInfo().
+        -->
+
+    </application>
+
+</manifest>

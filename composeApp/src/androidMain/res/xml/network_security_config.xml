@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Network Security Configuration
+    Allows cleartext HTTP traffic to localhost (Android emulator) and the
+    standard Android-emulator host alias 10.0.2.2 during local development.
+    All other destinations require HTTPS (default Android 9+ behaviour).
+
+    For production, remove the <domain-config> block and set DEFAULT_BACKEND_URL
+    in HttpApiClient.kt to your HTTPS backend URL.
+-->
+<network-security-config>
+    <!-- Allow cleartext HTTP for local development (emulator + physical device on LAN) -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

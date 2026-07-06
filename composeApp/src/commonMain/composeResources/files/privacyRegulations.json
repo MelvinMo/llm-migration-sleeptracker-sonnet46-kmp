@@ -1,0 +1,97 @@
+{
+  "pipeda": {
+    "overview": "The Personal Information Protection and Electronic Documents Act (PIPEDA) is Canada's federal private sector privacy law. It applies to private sector organizations that collect, use, or disclose personal information in the course of commercial activities. It sets out ground rules for how organizations must handle personal information.",
+    "keyPrinciples": [
+      {
+        "principle": "Accountability",
+        "id": "accountability",
+        "article": "4.1",
+        "description": "An organization is responsible for personal information under its control and shall designate an individual or individuals who are accountable for the organization's compliance with the following principles."
+      },
+      {
+        "principle": "Identifying Purposes",
+        "id": "purposes",
+        "article": "4.2",
+        "description": "The purposes for which personal information is collected shall be identified by the organization at or before the time the information is collected."
+      },
+      {
+        "principle": "Consent",
+        "id": "consent",
+        "article": "4.3",
+        "description": "The knowledge and consent of the individual are required for the collection, use, or disclosure of personal information, except where inappropriate."
+      },
+      {
+        "principle": "Limiting Collection",
+        "id": "collection",
+        "article": "4.4",
+        "description": "The collection of personal information shall be limited to that which is necessary for the purposes identified by the organization. Information shall be collected by fair and lawful means."
+      },
+      {
+        "principle": "Limiting Use, Disclosure, and Retention",
+        "id": "use",
+        "article": "4.5",
+        "description": "Personal information shall not be used or disclosed for purposes other than those for which it was collected, except with the consent of the individual or as required by law. Personal information shall be retained only as long as necessary for the fulfilment of those purposes."
+      },
+      {
+        "principle": "Accuracy",
+        "id": "accuracy",
+        "article": "4.6",
+        "description": "Personal information shall be as accurate, complete, and up-to-date as is necessary for the purposes for which it is to be used."
+      },
+      {
+        "principle": "Safeguards",
+        "id": "safeguards",
+        "article": "4.7",
+        "description": "Personal information shall be protected by security safeguards appropriate to the sensitivity of the information."
+      },
+      {
+        "principle": "Openness",
+        "id": "openness",
+        "article": "4.8",
+        "description": "An organization shall make readily available to individuals specific information about its policies and practices relating to the management of personal information."
+      },
+      {
+        "principle": "Individual Access",
+        "id": "access",
+        "article": "4.9",
+        "description": "Upon request, an individual shall be informed of the existence, use, and disclosure of his or her personal information and shall be given access to that information. An individual shall be able to challenge the accuracy and completeness of the information and have it amended as appropriate."
+      },
+      {
+        "principle": "Challenging Compliance",
+        "id": "compliance",
+        "article": "4.10",
+        "description": "An individual shall be able to address a challenge concerning compliance with the above principles to the designated individual or individuals accountable for the organization's compliance."
+      }
+    ],
+    "specificProvisions": {
+      "dataBreachNotification": {
+        "title": "Mandatory Breach Reporting (Articles 10.1 - 10.3)",
+        "summary": "Organizations must report breaches of security safeguards involving personal information under their control to the Privacy Commissioner of Canada if it is reasonable to believe that the breach creates a real risk of significant harm to an individual. Affected individuals must also be notified.",
+        "details": [
+          "Real risk of significant harm: Includes bodily harm, humiliation, damage to reputation or relationships, loss of employment, business or professional opportunities, financial loss, identity theft, negative effects on the credit record, and damage to or loss of property.",
+          "Reporting to OPC: As soon as feasible after determining real risk of significant harm.",
+          "Notifying individuals: As soon as feasible after determining real risk of significant harm, and the notification must be conspicuous and direct.",
+          "Record keeping: Organizations must keep a record of every breach for at least two years."
+        ]
+      },
+      "crossBorderDataFlows": {
+        "title": "Cross-Border Data Transfers",
+        "summary": "PIPEDA does not prohibit organizations from transferring personal information across borders. However, organizations remain accountable for the information and must ensure it receives a comparable level of protection while in the hands of a third party, including when transferred outside of Canada.",
+        "details": [
+          "Accountability remains with the transferring organization.",
+          "Contractual agreements with third parties should ensure comparable protection.",
+          "Individuals should be informed about the possibility of their data being stored or processed outside of Canada."
+        ]
+      },
+      "healthInformationSpecificity": {
+        "title": "Personal Health Information under PIPEDA",
+        "summary": "While PIPEDA is a general privacy law, it applies to personal health information collected, used, or disclosed by organizations in the course of commercial activities. Given the sensitive nature of health data, a higher standard for consent and safeguards is implicitly expected.",
+        "details": [
+          "Consent for health data should be explicit and informed.",
+          "Safeguards for health data must be robust.",
+          "Purposes for collecting health data must be clearly identified and limited."
+        ]
+      }
+    }
+  }
+}

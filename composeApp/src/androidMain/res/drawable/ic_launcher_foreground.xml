@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Sleep Tracker launcher icon foreground — crescent moon symbol.
+    Sized for adaptive icon foreground (108dp canvas, safe zone ~72dp).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Crescent moon path, centred in safe zone -->
+    <path
+        android:fillColor="#39ACE7"
+        android:pathData="
+            M54,22
+            C40.745,22 30,32.745 30,46
+            C30,59.255 40.745,70 54,70
+            C57.5,70 60.8,69.2 63.7,67.8
+            C57.3,64.6 53,58 53,50.5
+            C53,39.7 61.5,31 72,30.5
+            C68.1,25.3 61.5,22 54,22
+            Z"
+        android:strokeWidth="1"/>
+</vector>

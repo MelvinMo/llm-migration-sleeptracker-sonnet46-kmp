@@ -1,0 +1,102 @@
+-- MIGRATION: SQLDelight 2.x schema replaces expo-sqlite schema from LocalDatabaseManager.ts.
+-- CRITICAL: Table names (journals, sensor_data) and ALL column names are preserved exactly
+-- to maintain data compatibility with existing user databases on device.
+-- SQLDelight generates type-safe Kotlin query functions from this .sq file.
+
+-- ─── journals table ───────────────────────────────────────────────────────────
+-- MIGRATION: `CREATE TABLE IF NOT EXISTS journals` → SQLDelight handles IF NOT EXISTS
+-- via schema versioning (migrations). Column types match exactly.
+CREATE TABLE journals (
+    journalId    TEXT NOT NULL PRIMARY KEY,
+    userId       TEXT NOT NULL,
+    date         TEXT NOT NULL,          -- ISO date string e.g. 2025-04-03
+    bedtime      TEXT NOT NULL DEFAULT '',
+    alarmTime    TEXT NOT NULL DEFAULT '',
+    sleepDuration TEXT NOT NULL DEFAULT '',
+    diaryEntry   TEXT NOT NULL DEFAULT '',
+    sleepNotes   TEXT NOT NULL DEFAULT '[]', -- JSON array of SleepNote strings
+    createdAt    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+-- ─── sensor_data table ────────────────────────────────────────────────────────
+-- MIGRATION: Unified sensor table preserved exactly. All nullable fields for each
+-- sensor type remain nullable (TEXT) to match the original schema.
+CREATE TABLE sensor_data (
+    id                TEXT NOT NULL PRIMARY KEY,
+    userId            TEXT NOT NULL,
+    timestamp         INTEGER NOT NULL,   -- Unix ms
+    date              TEXT NOT NULL,      -- YYYY-MM-DD
+    sensorType        TEXT NOT NULL,      -- 'audio', 'light', 'accelerometer'
+
+    -- Audio fields (nullable)
+    averageDecibels   TEXT,
+    peakDecibels      TEXT,
+    frequencyBands    TEXT,               -- JSON: {"low":"...","mid":"...","high":"..."}
+    audioClipUri      TEXT,
+    snoreDetected     INTEGER,            -- 0 = false, 1 = true
+    ambientNoiseLevel TEXT,               -- 'quiet','moderate','loud','very_loud'
+
+    -- Light fields (nullable)
+    illuminance       TEXT,               -- Lux as string (encrypted)
+    lightLevel        TEXT,               -- 'dark','dim','moderate','bright'
+
+    -- Accelerometer fields (nullable)
+    x                 TEXT,
+    y                 TEXT,
+    z                 TEXT,
+    magnitude         TEXT,
+    movementIntensity TEXT,               -- 'still','light','moderate','active'
+
+    createdAt         TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+-- ─── Journal queries ──────────────────────────────────────────────────────────
+-- MIGRATION: SQLDelight generates these as typed Kotlin extension functions.
+
+getJournalByDate:
+SELECT * FROM journals WHERE userId = :userId AND date = :date LIMIT 1;
+
+getJournalsByUserId:
+SELECT * FROM journals WHERE userId = :userId ORDER BY date DESC;
+
+upsertJournal:
+INSERT OR REPLACE INTO journals (journalId, userId, date, bedtime, alarmTime, sleepDuration, diaryEntry, sleepNotes, createdAt)
+VALUES (:journalId, :userId, :date, :bedtime, :alarmTime, :sleepDuration, :diaryEntry, :sleepNotes, :createdAt);
+
+updateJournalFields:
+UPDATE journals
+SET bedtime = COALESCE(NULLIF(:bedtime, ''), bedtime),
+    alarmTime = COALESCE(NULLIF(:alarmTime, ''), alarmTime),
+    sleepDuration = COALESCE(NULLIF(:sleepDuration, ''), sleepDuration),
+    diaryEntry = COALESCE(NULLIF(:diaryEntry, ''), diaryEntry),
+    sleepNotes = COALESCE(NULLIF(:sleepNotes, ''), sleepNotes)
+WHERE date = :date AND userId = :userId;
+
+deleteJournalById:
+DELETE FROM journals WHERE journalId = :journalId AND userId = :userId;
+
+-- ─── Sensor queries ───────────────────────────────────────────────────────────
+
+insertSensorData:
+INSERT INTO sensor_data (
+    id, userId, timestamp, date, sensorType,
+    averageDecibels, peakDecibels, frequencyBands, audioClipUri, snoreDetected, ambientNoiseLevel,
+    illuminance, lightLevel,
+    x, y, z, magnitude, movementIntensity,
+    createdAt
+) VALUES (
+    :id, :userId, :timestamp, :date, :sensorType,
+    :averageDecibels, :peakDecibels, :frequencyBands, :audioClipUri, :snoreDetected, :ambientNoiseLevel,
+    :illuminance, :lightLevel,
+    :x, :y, :z, :magnitude, :movementIntensity,
+    :createdAt
+);
+
+getSensorDataByDate:
+SELECT * FROM sensor_data WHERE userId = :userId AND date = :date ORDER BY timestamp DESC;
+
+getSensorDataByDateAndType:
+SELECT * FROM sensor_data WHERE userId = :userId AND date = :date AND sensorType = :sensorType ORDER BY timestamp DESC;
+
+deleteSensorDataByDate:
+DELETE FROM sensor_data WHERE userId = :userId AND date = :date;

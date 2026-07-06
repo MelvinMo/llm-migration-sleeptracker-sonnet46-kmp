@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Theme.SleepTracker: Base application theme.
+        enableEdgeToEdge() in MainActivity requires an AppCompat/Material descendant.
+        NoActionBar variant hides the system action bar so Compose owns the full window.
+    -->
+    <!--
+        Parent: android:Theme.Material.NoActionBar is a dark platform theme available
+        from API 21+. Since minSdk = 26, no extra library dependency is required.
+        enableEdgeToEdge() in MainActivity overrides status/nav bar handling at runtime.
+    -->
+    <style name="Theme.SleepTracker" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#181719</item>
+        <item name="android:statusBarColor">#181719</item>
+        <item name="android:navigationBarColor">#181719</item>
+        <item name="android:colorPrimary">#39ACE7</item>
+        <item name="android:colorAccent">#39ACE7</item>
+    </style>
+</resources>
