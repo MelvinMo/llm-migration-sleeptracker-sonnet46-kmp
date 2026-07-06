@@ -229,4 +229,4 @@ If you're referencing this repo, here's the full citation:
 
 ## License
 
-All rights reserved — this is my thesis work. I've published it publicly so it's easy to review and reproduce, but please reach out to me before reusing or redistributing any of it.
+MIT — see [LICENSE](LICENSE). Use it, fork it, build on it.
